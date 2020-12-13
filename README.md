@@ -62,3 +62,12 @@ $ docker logs geth_node1 2>&1 | grep "enode:"
 $ docker logs geth_node2 2>&1 | grep "enode:"
 $ docker logs geth_node3 2>&1 | grep "enode:"
 ```
+
+
+### Work Division
+- Research Proposal: Andrei Carniel
+- Article Writing: Andrei Carniel & Gustavo Leme
+- Article Revision: Andrei Carniel & Gustavo Leme
+- Ethereum Smart Contract: Andrei Carniel & Gustavo Leme
+- Application Frontend: Gustavo Leme
+- Containerized Ethereum Network: Gustavo Leme
