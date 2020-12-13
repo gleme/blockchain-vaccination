@@ -39,6 +39,23 @@ services:
     #     volumes:
     #    - ./nodes/node2/geth:/root/ethereum/geth
 
+  node3:
+    build:
+      context: ./nodes/node3
+      dockerfile: Dockerfile
+    container_name: geth_node3
+    command: >
+      geth --datadir /root/ethereum --syncmode 'full' --port 30313
+      --networkid 32414 --ipcdisable --nodiscover
+      --mine --allow-insecure-unlock
+      --password password
+      --miner.gasprice '0'
+      --unlock 0
+    ports:
+      - "30313:30313"
+    volumes:
+      - ./nodes/node3/geth:/root/ethereum/geth
+  
   dashboard:
     build:
       context: ./monitoring/dashboard
