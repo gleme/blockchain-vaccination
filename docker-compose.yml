@@ -1,0 +1,60 @@
+version: '3.4'
+
+services:
+  node1:
+    build:
+      context: ./nodes/node1
+      dockerfile: Dockerfile
+    container_name: geth_node1
+    command: >
+      geth --datadir /root/ethereum --syncmode 'full' --port 30311
+      --http --http.addr '0.0.0.0' --http.port 8501 --http.corsdomain '*' --http.vhosts '*' --http.api 'eth,web3,personal,net'
+      --ws --ws.addr '0.0.0.0' --ws.api 'eth,web3,personal,net' --ws.origins '*'
+      --networkid 32414 --nodiscover --allow-insecure-unlock --mine
+      --miner.gasprice '0'
+      --unlock 0
+      --password password
+    ports:
+      - "8501:8501"
+      - "30311:30311"
+  # Uncomment if you need to persist the data on disk
+  #     volumes:
+  #    - ./nodes/node1/geth:/root/ethereum/geth
+
+  node2:
+    build:
+      context: ./nodes/node2
+      dockerfile: Dockerfile
+    container_name: geth_node2
+    command: >
+      geth --datadir /root/ethereum --syncmode 'full' --port 30312
+      --networkid 32414 --ipcdisable --nodiscover
+      --mine --allow-insecure-unlock
+      --password password
+      --miner.gasprice '0'
+      --unlock 0
+    ports:
+      - "30312:30312"
+    # Uncomment if you need to persist the data on disk
+    #     volumes:
+    #    - ./nodes/node2/geth:/root/ethereum/geth
+
+  dashboard:
+    build:
+      context: ./monitoring/dashboard
+      dockerfile: Dockerfile
+    container_name: dashboard
+    environment:
+      - WS_SECRET=eth-net-stats-secret
+    ports:
+      - "3000:3000"
+
+  ethnet:
+    build:
+      context: ./monitoring/api
+      dockerfile: Dockerfile
+    links:
+      - dashboard
+    container_name: ethnet
+    volumes:
+      - ./monitoring/api/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json
