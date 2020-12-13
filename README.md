@@ -50,7 +50,7 @@ $ docker-compose up -d
 
 After the Docker containers are built and running, you should get:
 
-- The Vaccination Application at [`http://localhost:8000`](http://localhost:8000)
+- The Vaccination Application at [`http://localhost`](http://localhost)
 - The Ethereum Network Status for node1 at [`http://localhost:3000`](http://localhost:3000)
 - The RCP Interface for node1 at [`http://localhost:8501`](http://localhost:8501)
 
