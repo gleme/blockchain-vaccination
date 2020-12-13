@@ -68,8 +68,21 @@ services:
     build:
       context: ./monitoring/api
       dockerfile: Dockerfile
+    container_name: ethnet
     links:
       - dashboard
-    container_name: ethnet
     volumes:
       - ./monitoring/api/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: vaccine_app
+    links:
+      - node1
+    ports:
+      - "80:8000"
+    volumes:
+      - ./app:/usr/app
+      - /usr/app/node_modules
