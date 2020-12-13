@@ -17,9 +17,8 @@ services:
     ports:
       - "8501:8501"
       - "30311:30311"
-  # Uncomment if you need to persist the data on disk
-  #     volumes:
-  #    - ./nodes/node1/geth:/root/ethereum/geth
+    volumes:
+      - ./nodes/node1/geth:/root/ethereum/geth
 
   node2:
     build:
@@ -35,9 +34,8 @@ services:
       --unlock 0
     ports:
       - "30312:30312"
-    # Uncomment if you need to persist the data on disk
-    #     volumes:
-    #    - ./nodes/node2/geth:/root/ethereum/geth
+    volumes:
+      - ./nodes/node2/geth:/root/ethereum/geth
 
   node3:
     build:
