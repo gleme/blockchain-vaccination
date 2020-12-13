@@ -1,4 +1,8 @@
+# New node's data
 /nodes/node1/geth
 /nodes/node2/geth
 /nodes/node3/geth
 
+# OS Files
+.DS_Store
+.Thumbs
